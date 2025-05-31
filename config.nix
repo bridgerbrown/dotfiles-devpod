@@ -2,14 +2,11 @@
 	packageOverrides = pkgs: with pkgs; {
 		myPackages = pkgs.buildEnv {
 			name = "my-packages";
-			paths = [
+			paths = with pkgs; [
 				git
-				homebrew
-				neovim
 				python3
 				poetry
-			]
-		}
-	}
-}
-
+			];
+		};
+	};
+};
