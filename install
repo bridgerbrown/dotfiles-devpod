@@ -18,17 +18,21 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 brew update || echo "Homebrew update failed"
 
 # Dotfiles setup
-cd "$HOME/dotfiles" || exit 1
+DOTFILES_DIR="$HOME/dotfiles"
+cd "$DOTFILES_DIR"|| exit 1
 
-# Initialize submodules only if they aren't already present
+# Setup git submodule repos
 if [ -d ".git" ] && grep -q "submodule" .gitmodules 2>/dev/null; then
+  echo "Initializing git submodule repos..."
+  git submodule sync
   git submodule update --init --recursive
 fi
 
 export XDG_CONFIG_HOME="$HOME"/.config
 mkdir -p "$XDG_CONFIG_HOME"
-ln -sf "/home/dotfiles/config.nvim" "$XDG_CONFIG_HOME"/nvim
-ln -sf "/home/dotfiles/zsh-config/.zshrc" "$HOME"/.zshrc
+
+ln -sf "$DOTFILES_DIR/config.nvim" "$XDG_CONFIG_HOME/nvim"
+ln -sf "$DOTFILES_DIR/zsh-config/.zshrc" "$HOME/.zshrc"
 
 # Brew packages
 brew install fd ripgrep pyenv npm awscli neovim
