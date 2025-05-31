@@ -24,13 +24,13 @@ cd "$DOTFILES_DIR"|| exit 1
 export XDG_CONFIG_HOME="$HOME"/.config
 mkdir -p "$XDG_CONFIG_HOME"
 
-ln -sf "$DOTFILES_DIR/config.nvim" "$XDG_CONFIG_HOME/nvim"
-ln -sf "$DOTFILES_DIR/zsh-config/.zshrc" "$HOME/.zshrc"
+ln -sf "$DOTFILES_DIR/nvim" "$XDG_CONFIG_HOME/nvim"
+ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
-
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
 
 # Brew packages
 brew install fd ripgrep pyenv npm awscli neovim
+
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
 
 echo "SETUP COMPLETE!"

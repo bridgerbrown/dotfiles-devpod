@@ -6,6 +6,7 @@
 				git
 				python3
 				poetry
+				zsh
 			];
 		};
 	};
