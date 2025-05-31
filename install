@@ -21,13 +21,6 @@ brew update || echo "Homebrew update failed"
 DOTFILES_DIR="$HOME/dotfiles"
 cd "$DOTFILES_DIR"|| exit 1
 
-# Setup git submodule repos
-if [ -d ".git" ] && grep -q "submodule" .gitmodules 2>/dev/null; then
-  echo "Initializing git submodule repos..."
-  git submodule sync
-  git submodule update --init --recursive
-fi
-
 export XDG_CONFIG_HOME="$HOME"/.config
 mkdir -p "$XDG_CONFIG_HOME"
 
