@@ -32,23 +32,18 @@ ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 # brew packages
 echo "Installing Homebrew packages..."
 brew install fd ripgrep pyenv npm awscli neovim
-
-# setup user name and pw
-DEVPOD_USER="devpod-user"
-if id -u vscode >/dev/null 2>&1; then
-  echo "Renaming user 'vscode' to '$DEVPOD_USER'..."
-  sudo usermod -l "$DEVPOD_USER" vscode
-  sudo groupmod -n "$DEVPOD_USER" vscode
-fi
-echo "Enter a password for user $DEVPOD_USER:"
-sudo passwd "$DEVPOD_USER"
-
-# setup zsh shell
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-sudo chsh -s "$(which zsh)" "$(whoami)"
-zsh -c 'source "$HOME/dotfiles/.zshrc"'
 
-echo -e "\n"
-echo "______________________"
-echo "Devpod setup complete!"
-echo "______________________"
+echo -e "\n\n"
+echo -e "\033[1;32m╭────────────────────────────────────────────╮\033[0m"
+echo -e "\033[1;32m│                                            │\033[0m"
+echo -e "\033[1;32m│           Devpod setup complete!           │\033[0m"
+echo -e "\033[1;32m│                                            │\033[0m"
+echo -e "\033[1;32m│        SSH into the devpod container       │\033[0m"
+echo -e "\033[1;32m│                                            │\033[0m"
+echo -e "\033[1;32m│     Then run this file for system setup :  │\033[0m"
+echo -e "\033[1;32m│                                            │\033[0m"
+echo -e "\033[1;32m│     ~/dotfiles/scripts/setup-system.sh     │\033[0m"
+echo -e "\033[1;32m│                                            │\033[0m"
+echo -e "\033[1;32m╰────────────────────────────────────────────╯\033[0m"
+echo -e "\n\n"
