@@ -13,6 +13,9 @@ if ! command -v brew &>/dev/null; then
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
 brew update || echo "Homebrew update failed"
 
 # dotfiles setup

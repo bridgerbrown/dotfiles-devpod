@@ -8,12 +8,6 @@ sudo passwd root
 echo "Enter a password for user vscode:"
 sudo passwd vscode
 
-# setup homebrew path
-if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-  echo "Configuring Homebrew environment..."
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
 # setup zsh shell
 echo "Setting up zshrc..."
 zsh -c 'source "$HOME/dotfiles/.zshrc"'
