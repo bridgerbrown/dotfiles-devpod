@@ -13,9 +13,6 @@ if ! command -v brew &>/dev/null; then
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-
 brew update || echo "Homebrew update failed"
 
 # dotfiles setup
@@ -32,7 +29,6 @@ ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 # brew packages
 echo "Installing Homebrew packages..."
 brew install fd ripgrep pyenv npm awscli neovim
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 echo -e "\n\n"
 echo -e "\033[1;32m╭────────────────────────────────────────────╮\033[0m"

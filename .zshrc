@@ -46,3 +46,4 @@ zstyle ':vcs_info:*:*' check-for-changes true
 
 # PATHS
 export PATH="$HOME/.local/bin:$PATH"
+

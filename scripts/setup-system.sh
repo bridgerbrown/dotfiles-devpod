@@ -1,11 +1,18 @@
 #!/bin/bash
 set -e
 
+# setup user passwords
 echo "Enter a password for root user:"
 sudo passwd root
 
 echo "Enter a password for user vscode:"
 sudo passwd vscode
+
+# setup homebrew path
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  echo "Configuring Homebrew environment..."
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # setup zsh shell
 echo "Setting up zshrc..."
