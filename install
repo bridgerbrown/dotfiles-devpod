@@ -34,6 +34,7 @@ ln -sf "$DOTFILES_DIR/.bashrc " "$HOME/.bashrc"
 # brew packages
 echo "Installing Homebrew packages..."
 brew install fd ripgrep pyenv npm awscli neovim
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 echo -e "\n\n"
 echo -e "\033[1;32m╭────────────────────────────────────────────╮\033[0m"
