@@ -1,14 +1,15 @@
 #!/bin/bash
 
+# exit if fail
 set -e
 
+# update system
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
-# Homebrew 
-
+# homebrew setup
 if ! command -v brew &>/dev/null; then
-  echo "Installing Homebrew"
+  echo "Installing Homebrew..."
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
@@ -17,7 +18,8 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 brew update || echo "Homebrew update failed"
 
-# Dotfiles setup
+# dotfiles setup
+echo "Setting dotfiles configuration..."
 DOTFILES_DIR="$HOME/dotfiles"
 cd "$DOTFILES_DIR"|| exit 1
 
@@ -27,10 +29,26 @@ mkdir -p "$XDG_CONFIG_HOME"
 ln -sf "$DOTFILES_DIR/nvim" "$XDG_CONFIG_HOME/nvim"
 ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
-
-# Brew packages
+# brew packages
+echo "Installing Homebrew packages..."
 brew install fd ripgrep pyenv npm awscli neovim
 
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
+# setup user name and pw
+DEVPOD_USER="devpod-user"
+if id -u vscode >/dev/null 2>&1; then
+  echo "Renaming user 'vscode' to '$DEVPOD_USER'..."
+  sudo usermod -l "$DEVPOD_USER" vscode
+  sudo groupmod -n "$DEVPOD_USER" vscode
+fi
+echo "Enter a password for user $DEVPOD_USER:"
+sudo passwd "$DEVPOD_USER"
 
-echo "SETUP COMPLETE!"
+# setup zsh shell
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+sudo chsh -s "$(which zsh)" "$(whoami)"
+zsh -c 'source "$HOME/dotfiles/.zshrc"'
+
+echo -e "\n"
+echo "______________________"
+echo "Devpod setup complete!"
+echo "______________________"
